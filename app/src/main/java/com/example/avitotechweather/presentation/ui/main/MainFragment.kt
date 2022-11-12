@@ -9,18 +9,14 @@ import android.view.View
 
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import com.example.avitotechweather.R
 import com.example.avitotechweather.databinding.MainFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.toLongOrDefault
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    private lateinit var binding:MainFragmentBinding
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var binding:MainFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +31,10 @@ class MainFragment : Fragment() {
 
         viewModel.numberLiveData.observe(viewLifecycleOwner) {
             binding.number.text = it.toString()
+        }
+
+        viewModel.cityNameLiveData.observe(viewLifecycleOwner) {
+            binding.coordinates.text = it.toString()
         }
 
         binding.number.setOnClickListener {

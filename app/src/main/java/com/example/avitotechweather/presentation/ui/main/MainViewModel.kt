@@ -1,23 +1,16 @@
 package com.example.avitotechweather.presentation.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.avitotechweather.data.repository.IOpenWeatherMapRepository
 import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
-import com.example.avitotechweather.domain.entity.CityDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel
-@Inject constructor(private val openWeatherMapRepository:
+class MainViewModel @Inject constructor(private val openWeatherMapRepository:
                     OpenWeatherMapRepository)
     : ViewModel() {
 
@@ -37,19 +30,10 @@ class MainViewModel
     }
 
     fun getCoordinates(cityName: String){
-//        viewModelScope.launch {
-//            openWeatherMapRepository.getCityLatLon(cityName).enqueue(object : Callback<CityDTO>{
-//                override fun onResponse(call: Call<CityDTO>, response: Response<CityDTO>) {
-//                    _cityNameLiveData.value = "${response.body()?.lat}, ${response.body()?.lon}"
+        viewModelScope.launch {
+            val response = openWeatherMapRepository.getCurrentWeather(cityName)[0]
+            _cityNameLiveData.value = "${response.lat}, ${response.lon}"
 //
-//                    Log.d("KOT", _cityNameLiveData.toString())
-//                }
-//
-//                override fun onFailure(call: Call<CityDTO>, t: Throwable) {
-//                    _cityNameLiveData.value = null
-//                }
-//
-//            })
-//        }
+        }
     }
 }
