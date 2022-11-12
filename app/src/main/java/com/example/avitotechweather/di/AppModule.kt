@@ -2,6 +2,7 @@ package com.example.avitotechweather.di
 
 import com.example.avitotechweather.data.network.OpenWeatherMapApi
 import com.example.avitotechweather.data.network.Utils.BASE_URL
+import com.example.avitotechweather.exception.ResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,7 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 

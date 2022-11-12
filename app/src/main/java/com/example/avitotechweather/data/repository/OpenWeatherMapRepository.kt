@@ -10,11 +10,11 @@ import javax.inject.Inject
 class OpenWeatherMapRepository
 @Inject constructor(private val api: OpenWeatherMapApi )
 {
-    suspend fun getCityLatLon(cityName: String): List<CityDTO> {
+    suspend fun getCityLatLon(cityName: String): Result<List<CityDTO>> {
         return api.getCityLatLon(cityName)
     }
 
-    suspend fun getCurrentWeather(cityName: String): List<WeatherDTO> {
+    suspend fun getCurrentWeather(cityName: String): Result<List<WeatherDTO>> {
         return api.getCurrentWeather()
     }
 }

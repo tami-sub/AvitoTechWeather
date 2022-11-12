@@ -1,5 +1,6 @@
 package com.example.avitotechweather.presentation.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,11 +33,21 @@ class MainViewModel @Inject constructor(private val openWeatherMapRepository:
 
     fun getCoordinates(cityName: String){
         viewModelScope.launch {
-            val response = openWeatherMapRepository.getCityLatLon(cityName)[0]
-            _cityNameLiveData.value = "${response.lat}, ${response.lon}"
+            val response = openWeatherMapRepository.getCityLatLon(cityName).onSuccess {
+                Log.d("KOT", "URAAAA")
+
+                _cityNameLiveData.value = "${it[0].lat}, ${it[0].lon}"
+            }.onFailure {
+                Log.d("KOT", it.message.toString())
+                Log.d("KOT", it.localizedMessage.toString())
+            }
 
             delay(2000)
-//            openWeatherMapRepository.getCurrentWeather(cityName)
+//            openWeatherMapRepository.getCurrentWeather(cityName).onSuccess {
+//
+//            }.onFailure{
+//                Log.d("KOT", "BLYAAA")
+//            }
 //
         }
     }

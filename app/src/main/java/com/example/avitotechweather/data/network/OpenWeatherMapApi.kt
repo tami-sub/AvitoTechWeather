@@ -14,7 +14,7 @@ interface OpenWeatherMapApi {
     suspend fun getCityLatLon(
         @Query("q") city: String,
         @Query("appid") appId: String = API_KEY
-    ): List<CityDTO>
+    ): Result<List<CityDTO>>
 
 //    @GET("v1/current.json?key=f16f2a05abcd48c985d144600221211&q=London")
 //    suspend fun getCurrentWeather(
@@ -35,5 +35,5 @@ interface OpenWeatherMapApi {
 //        @Query("q") city: String,
 //        @Query("appid") appId: String = API_KEY
 //
-    ): List<WeatherDTO>
+    ): Result<List<WeatherDTO>>
 }
