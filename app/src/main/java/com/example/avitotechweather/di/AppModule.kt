@@ -22,12 +22,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun getOpenWeatherMapRepositoryInstance(retrofit: Retrofit): IOpenWeatherMapRepository {
-        return retrofit.create(IOpenWeatherMapRepository::class.java)
-    }
-
-    @Provides
-    @Singleton
     fun getRetroInstance(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

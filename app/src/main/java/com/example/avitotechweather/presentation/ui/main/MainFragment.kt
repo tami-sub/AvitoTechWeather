@@ -13,8 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.R
 import com.example.avitotechweather.databinding.MainFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.internal.toLongOrDefault
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding:MainFragmentBinding

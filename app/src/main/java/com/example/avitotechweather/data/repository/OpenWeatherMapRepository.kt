@@ -5,11 +5,11 @@ import com.example.avitotechweather.domain.entity.CityDTO
 import retrofit2.Call
 import javax.inject.Inject
 
-class OpenWeatherMapRepository @Inject constructor(
-    private val api: OpenWeatherMapApi,
-) : IOpenWeatherMapRepository {
+class OpenWeatherMapRepository
+@Inject constructor(private val api: OpenWeatherMapApi )
+{
 
-    override suspend fun getCityLatLon(cityName: String): Call<CityDTO> {
-        return api.getCityLatLon(cityName)
-    }
+//    suspend fun getCityLatLon(cityName: String): Call<CityDTO> {
+//        return api.getCityLatLon(cityName)
+//    }
 }

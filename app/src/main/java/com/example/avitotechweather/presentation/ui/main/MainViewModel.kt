@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.data.repository.IOpenWeatherMapRepository
+import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
 import com.example.avitotechweather.domain.entity.CityDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +16,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val openWeatherMapInteractor: IOpenWeatherMapRepository)
+class MainViewModel
+@Inject constructor(private val openWeatherMapRepository:
+                    OpenWeatherMapRepository)
     : ViewModel() {
 
     private var _numberLiveData = MutableLiveData<Int>()
@@ -35,19 +37,19 @@ class MainViewModel @Inject constructor(
     }
 
     fun getCoordinates(cityName: String){
-        viewModelScope.launch {
-            openWeatherMapInteractor.getCityLatLon(cityName).enqueue(object : Callback<CityDTO>{
-                override fun onResponse(call: Call<CityDTO>, response: Response<CityDTO>) {
-                    _cityNameLiveData.value = "${response.body()?.lat}, ${response.body()?.lon}"
-
-                    Log.d("KOT", _cityNameLiveData.toString())
-                }
-
-                override fun onFailure(call: Call<CityDTO>, t: Throwable) {
-                    _cityNameLiveData.value = null
-                }
-
-            })
-        }
+//        viewModelScope.launch {
+//            openWeatherMapRepository.getCityLatLon(cityName).enqueue(object : Callback<CityDTO>{
+//                override fun onResponse(call: Call<CityDTO>, response: Response<CityDTO>) {
+//                    _cityNameLiveData.value = "${response.body()?.lat}, ${response.body()?.lon}"
+//
+//                    Log.d("KOT", _cityNameLiveData.toString())
+//                }
+//
+//                override fun onFailure(call: Call<CityDTO>, t: Throwable) {
+//                    _cityNameLiveData.value = null
+//                }
+//
+//            })
+//        }
     }
 }
