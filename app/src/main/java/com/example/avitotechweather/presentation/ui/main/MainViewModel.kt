@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class MainViewModel @Inject constructor(private val openWeatherMapRepository:
 
     init{
         _numberLiveData.value = 20
-        getCoordinates("Москва")
+        getCoordinates("Санкт-Петербург")
     }
     fun increaseNumber(){
         _numberLiveData.value = numberLiveData.value?.plus(2)
@@ -31,8 +32,11 @@ class MainViewModel @Inject constructor(private val openWeatherMapRepository:
 
     fun getCoordinates(cityName: String){
         viewModelScope.launch {
-            val response = openWeatherMapRepository.getCurrentWeather(cityName)[0]
+            val response = openWeatherMapRepository.getCityLatLon(cityName)[0]
             _cityNameLiveData.value = "${response.lat}, ${response.lon}"
+
+            delay(2000)
+//            openWeatherMapRepository.getCurrentWeather(cityName)
 //
         }
     }

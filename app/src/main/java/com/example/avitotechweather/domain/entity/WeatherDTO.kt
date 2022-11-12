@@ -6,8 +6,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WeatherDTO (
-    @SerializedName("name")
-    val temperature: String,
-    @SerializedName("localtime")
-    val dateTime: String
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("id")
+    val name: String,
+    @SerializedName("cod")
+    val cod: Int
 ) : Parcelable
