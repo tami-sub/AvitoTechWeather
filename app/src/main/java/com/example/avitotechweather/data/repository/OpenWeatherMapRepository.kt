@@ -14,7 +14,7 @@ class OpenWeatherMapRepository
         return api.getCityLatLon(cityName)
     }
 
-    suspend fun getCurrentWeather(cityName: String): Result<List<WeatherDTO>> {
-        return api.getCurrentWeather()
+    suspend fun getCurrentWeather(cityName: String): Result<WeatherDTO> {
+        return api.getCurrentWeather(cityName)
     }
 }

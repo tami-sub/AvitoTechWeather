@@ -2,9 +2,7 @@ package com.example.avitotechweather.data.network
 
 import com.example.avitotechweather.data.network.Utils.API_KEY
 import com.example.avitotechweather.domain.entity.CityDTO
-import com.example.avitotechweather.domain.entity.SuccessDTO
 import com.example.avitotechweather.domain.entity.WeatherDTO
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -30,10 +28,12 @@ interface OpenWeatherMapApi {
 ////
 //    ): List<WeatherDTO>
 
-    @GET("data/2.5/weather?lang=ru&q=Москва&appid=74c6e18ef7e46d0437362b309d2a60df")
+    @GET("data/2.5/weather")
     suspend fun getCurrentWeather(
-//        @Query("q") city: String,
-//        @Query("appid") appId: String = API_KEY
+        @Query("q") city: String,
+        @Query("units") celsius: String = "metric",
+        @Query("lang") lang: String = "ru",
+        @Query("appid") appId: String = API_KEY
 //
-    ): Result<List<WeatherDTO>>
+    ): Result<WeatherDTO>
 }

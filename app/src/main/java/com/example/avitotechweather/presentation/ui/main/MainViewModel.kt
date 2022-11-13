@@ -5,11 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.avitotechweather.data.network.Utils.getProperDateTime
 import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.sql.Date
+import java.sql.Time
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.hours
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val openWeatherMapRepository:
@@ -22,6 +31,9 @@ class MainViewModel @Inject constructor(private val openWeatherMapRepository:
     private var _cityNameLiveData = MutableLiveData<String?>()
     val cityNameLiveData: MutableLiveData<String?> = _cityNameLiveData
 
+//    private var _cityNameLiveData = MutableLiveData<String?>()
+//    val cityNameLiveData: MutableLiveData<String?> = _cityNameLiveData
+
 
     init{
         _numberLiveData.value = 20
@@ -33,22 +45,35 @@ class MainViewModel @Inject constructor(private val openWeatherMapRepository:
 
     fun getCoordinates(cityName: String){
         viewModelScope.launch {
-            val response = openWeatherMapRepository.getCityLatLon(cityName).onSuccess {
-                Log.d("KOT", "URAAAA")
+            Log.d("JOKA", "BOKAS")
 
-                _cityNameLiveData.value = "${it[0].lat}, ${it[0].lon}"
-            }.onFailure {
+            openWeatherMapRepository.getCurrentWeather(cityName).onSuccess {
+                Log.d("KOT", "NAKONEC-TO")
+                try {
+                    _cityNameLiveData.value = "${it.name}, ${
+                        getProperDateTime(it.dataTime)
+                        
+                    }"
+                }
+                catch (e: Exception){
+                    Log.d("JOKA", e.message.toString())
+                }
+
+
+            }.onFailure{
                 Log.d("KOT", it.message.toString())
-                Log.d("KOT", it.localizedMessage.toString())
+                Log.d("KOT", "BLYAAA")
             }
 
-            delay(2000)
-//            openWeatherMapRepository.getCurrentWeather(cityName).onSuccess {
+//            openWeatherMapRepository.getCityLatLon(cityName).onSuccess {
+//                Log.d("KOT", "Initial coordgeting ok")
 //
-//            }.onFailure{
-//                Log.d("KOT", "BLYAAA")
+//                _cityNameLiveData.value = "${it[0].lat}, ${it[0].lon}"
+//            }.onFailure {
+//                Log.d("KOT", it.message.toString())
+//                Log.d("KOT", it.localizedMessage.toString())
 //            }
-//
+
         }
     }
 }
