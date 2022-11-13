@@ -1,6 +1,6 @@
 package com.example.avitotechweather.data.network
 
-import com.example.avitotechweather.data.network.Utils.API_KEY
+import com.example.avitotechweather.utils.Utils.API_KEY
 import com.example.avitotechweather.domain.entity.CityDTO
 import com.example.avitotechweather.domain.entity.WeatherDTO
 import retrofit2.http.GET

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.example.avitotechweather.databinding.MainFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,11 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var binding:MainFragmentBinding
+    private lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = MainFragmentBinding.inflate(layoutInflater)
         return binding.root
@@ -29,16 +30,16 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.numberLiveData.observe(viewLifecycleOwner) {
-            binding.number.text = it.toString()
-        }
-
-        viewModel.cityNameLiveData.observe(viewLifecycleOwner) {
-            binding.coordinates.text = it.toString()
-        }
-
-        binding.number.setOnClickListener {
-            viewModel.increaseNumber()
+        with(binding) {
+            viewModel.cityNameLiveData.observe(viewLifecycleOwner) {
+                coordinates.text = it.toString()
+            }
+            viewModel.currentWeatherLiveData.observe(viewLifecycleOwner) {
+                currentWeather.text = it.toString()
+            }
+            search.setOnClickListener {
+                viewModel.getCurrentWeather(cityName.text.toString().trim())
+            }
         }
     }
 

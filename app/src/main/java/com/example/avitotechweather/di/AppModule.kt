@@ -1,7 +1,7 @@
 package com.example.avitotechweather.di
 
 import com.example.avitotechweather.data.network.OpenWeatherMapApi
-import com.example.avitotechweather.data.network.Utils.BASE_URL
+import com.example.avitotechweather.utils.Utils.BASE_URL
 import com.example.avitotechweather.exception.ResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
