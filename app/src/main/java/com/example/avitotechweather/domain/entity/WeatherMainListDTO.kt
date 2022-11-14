@@ -10,4 +10,5 @@ data class WeatherMainListDTO(
     @SerializedName("feels_like")
     val feelsLike: Float,
     val humidity: Int,
+    val pressure: Int
 ) : Parcelable

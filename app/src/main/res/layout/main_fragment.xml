@@ -8,6 +8,18 @@
     tools:context=".presentation.ui.main.MainFragment"
     android:isScrollContainer="true">
 
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+                <include
+                    android:id="@+id/item_weather"
+                    layout="@layout/item_weather" />
+        </FrameLayout>
+
         <EditText
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
@@ -17,27 +29,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+            app:layout_constraintVertical_bias="0.02" />
 
         <TextView
             android:id="@+id/coordinates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Город"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewDay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cityName" />
+            app:layout_constraintTop_toBottomOf="@+id/cityName"
+            app:layout_constraintVertical_bias="0.02"/>
 
-        <TextView
-            android:id="@+id/current_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/cityName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/search"
@@ -58,5 +64,22 @@
             app:layout_constraintEnd_toStartOf="@+id/cityName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cityName" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerViewWeek"
+            app:layout_constraintTop_toBottomOf="@+id/coordinates"
+            app:layout_constraintVertical_bias="0.02">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewDay">
+        </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

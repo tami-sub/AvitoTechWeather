@@ -7,12 +7,11 @@ object Utils {
     const val BASE_URL = "http://api.openweathermap.org/"
     const val API_KEY = "74c6e18ef7e46d0437362b309d2a60df"
 
+    fun getIcon(str: String): String = "http://openweathermap.org/img/w/${str}.png"
     fun getProperDateTime(date: Long): String {
-        val dtFormat = SimpleDateFormat("Дата: dd-MM-YYYY \nВремя взятия метеоданных по вашему ч.п.: HH:mm")
+        val dtFormat =
+            SimpleDateFormat("Дата: dd-MM-YYYY \nВремя взятия метеоданных по вашему ч.п.: HH:mm")
         dtFormat.timeZone
-        return dtFormat.format(Date(date*1000))
+        return dtFormat.format(Date(date * 1000))
     }
-
-//    const val BASE_URL = "https://api.weatherapi.com/"
-//    const val API_KEY = "f16f2a05abcd48c985d144600221211"
 }

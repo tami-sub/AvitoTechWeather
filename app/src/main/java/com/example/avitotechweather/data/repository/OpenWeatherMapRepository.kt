@@ -9,10 +9,6 @@ import javax.inject.Inject
 class OpenWeatherMapRepository
 @Inject constructor(private val api: OpenWeatherMapApi )
 {
-    suspend fun getCityLatLon(cityName: String): Result<List<CityDTO>> {
-        return api.getCityLatLon(cityName)
-    }
-
     suspend fun getCurrentWeather(cityName: String): Result<WeatherDTO> {
         return api.getCurrentWeather(cityName)
     }
@@ -21,7 +17,11 @@ class OpenWeatherMapRepository
         return api.getCurrentGeoWeather(lat, lon)
     }
 
-    suspend fun getDayWeather(city: String, cnt: Int): Result<WeatherAllDTO> {
-        return api.getDayWeather(city, cnt)
+    suspend fun getDayWeekWeather(city: String, cnt: Int): Result<WeatherAllDTO> {
+        return api.getDayWeekWeather(city, cnt)
+    }
+
+    suspend fun getGeoDayWeekWeather(lat: String, lon: String, cnt: Int): Result<WeatherAllDTO> {
+        return api.getGeoDayWeekWeather(lat, lon, cnt)
     }
 }

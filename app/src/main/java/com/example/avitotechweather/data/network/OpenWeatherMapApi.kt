@@ -9,14 +9,8 @@ import retrofit2.http.Query
 
 interface OpenWeatherMapApi {
 
-    @GET("geo/1.0/direct")
-    suspend fun getCityLatLon(
-        @Query("q") city: String,
-        @Query("appid") appId: String = API_KEY
-    ): Result<List<CityDTO>>
-
     @GET("data/2.5/forecast")
-    suspend fun getDayWeather(
+    suspend fun getDayWeekWeather(
         @Query("q") city: String,
         @Query("cnt") cnt: Int,
         @Query("units") celsius: String = "metric",
@@ -24,14 +18,15 @@ interface OpenWeatherMapApi {
         @Query("appid") appId: String = API_KEY
     ): Result<WeatherAllDTO>
 
-//    @GET("data/2.5/forecast")
-//    suspend fun getDayWeather(
-//        @Query("lat") lat: String,
-//        @Query("lon") lan: String,
-//        @Query("units") celsius: String = "metric",
-//        @Query("lang") lang: String = "ru",
-//        @Query("appid") appId: String = API_KEY
-//    ): List<WeatherDTO>
+    @GET("data/2.5/forecast")
+    suspend fun getGeoDayWeekWeather(
+        @Query("lat") lat: String,
+        @Query("lon") lan: String,
+        @Query("cnt") cnt: Int,
+        @Query("units") celsius: String = "metric",
+        @Query("lang") lang: String = "ru",
+        @Query("appid") appId: String = API_KEY
+    ): Result<WeatherAllDTO>
 
     @GET("data/2.5/weather")
     suspend fun getCurrentWeather(
@@ -39,7 +34,6 @@ interface OpenWeatherMapApi {
         @Query("units") celsius: String = "metric",
         @Query("lang") lang: String = "ru",
         @Query("appid") appId: String = API_KEY
-//
     ): Result<WeatherDTO>
 
     @GET("data/2.5/weather")
@@ -49,6 +43,5 @@ interface OpenWeatherMapApi {
         @Query("units") celsius: String = "metric",
         @Query("lang") lang: String = "ru",
         @Query("appid") appId: String = API_KEY
-//
     ): Result<WeatherDTO>
 }
