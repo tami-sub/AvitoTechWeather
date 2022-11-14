@@ -1,5 +1,6 @@
 package com.example.avitotechweather.data.network
 
+import com.example.avitotechweather.domain.entity.WeatherAllDTO
 import com.example.avitotechweather.utils.Utils.API_KEY
 import com.example.avitotechweather.domain.entity.CityDTO
 import com.example.avitotechweather.domain.entity.WeatherDTO
@@ -14,23 +15,37 @@ interface OpenWeatherMapApi {
         @Query("appid") appId: String = API_KEY
     ): Result<List<CityDTO>>
 
-//    @GET("v1/current.json?key=f16f2a05abcd48c985d144600221211&q=London")
-//    suspend fun getCurrentWeather(
-////        @Query("key") appId: String = API_KEY,
-////        @Query("q") city: String
-////
-//    ): List<WeatherDTO>
+    @GET("data/2.5/forecast")
+    suspend fun getDayWeather(
+        @Query("q") city: String,
+        @Query("cnt") cnt: Int,
+        @Query("units") celsius: String = "metric",
+        @Query("lang") lang: String = "ru",
+        @Query("appid") appId: String = API_KEY
+    ): Result<WeatherAllDTO>
 
-//    @GET("v1/current.json")
-//    suspend fun getCurrentWeather(
-////        @Query("key") appId: String = API_KEY,
-////        @Query("q") city: String
-////
+//    @GET("data/2.5/forecast")
+//    suspend fun getDayWeather(
+//        @Query("lat") lat: String,
+//        @Query("lon") lan: String,
+//        @Query("units") celsius: String = "metric",
+//        @Query("lang") lang: String = "ru",
+//        @Query("appid") appId: String = API_KEY
 //    ): List<WeatherDTO>
 
     @GET("data/2.5/weather")
     suspend fun getCurrentWeather(
         @Query("q") city: String,
+        @Query("units") celsius: String = "metric",
+        @Query("lang") lang: String = "ru",
+        @Query("appid") appId: String = API_KEY
+//
+    ): Result<WeatherDTO>
+
+    @GET("data/2.5/weather")
+    suspend fun getCurrentGeoWeather(
+        @Query("lat") lat: String,
+        @Query("lon") lan: String,
         @Query("units") celsius: String = "metric",
         @Query("lang") lang: String = "ru",
         @Query("appid") appId: String = API_KEY

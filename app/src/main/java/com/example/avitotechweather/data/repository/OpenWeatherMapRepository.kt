@@ -1,6 +1,7 @@
 package com.example.avitotechweather.data.repository
 
 import com.example.avitotechweather.data.network.OpenWeatherMapApi
+import com.example.avitotechweather.domain.entity.WeatherAllDTO
 import com.example.avitotechweather.domain.entity.CityDTO
 import com.example.avitotechweather.domain.entity.WeatherDTO
 import javax.inject.Inject
@@ -14,5 +15,13 @@ class OpenWeatherMapRepository
 
     suspend fun getCurrentWeather(cityName: String): Result<WeatherDTO> {
         return api.getCurrentWeather(cityName)
+    }
+
+    suspend fun getCurrentGeoWeather(lat: String, lon:String): Result<WeatherDTO> {
+        return api.getCurrentGeoWeather(lat, lon)
+    }
+
+    suspend fun getDayWeather(city: String, cnt: Int): Result<WeatherAllDTO> {
+        return api.getDayWeather(city, cnt)
     }
 }
