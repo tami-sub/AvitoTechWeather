@@ -108,10 +108,7 @@ class MainFragment : Fragment(), LocationListener {
             locationManager =
                 requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 5f, this)
-            Log.d("JOKA", "blaya1, ${checkLoadGPS}, $lat")
-
             if (checkLoadGPS) {
-                Log.d("JOKA", "blaya2, ${lat}")
                 getCurrentLocation(lat, lon)
             }
         }

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.utils.Utils.getProperDateTime
 import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
 import com.example.avitotechweather.domain.entity.Day
-import com.example.avitotechweather.domain.entity.WeatherDTO
+import com.example.avitotechweather.domain.entity.WeatherCurrentDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +21,8 @@ class MainViewModel @Inject constructor(
     private var _cityNameLiveData = MutableLiveData<String?>()
     val cityNameLiveData: MutableLiveData<String?> = _cityNameLiveData
 
-    private var _currentWeatherLiveData = MutableLiveData<WeatherDTO>()
-    val currentWeatherLiveData: MutableLiveData<WeatherDTO> = _currentWeatherLiveData
+    private var _currentWeatherLiveData = MutableLiveData<WeatherCurrentDTO>()
+    val currentWeatherLiveData: MutableLiveData<WeatherCurrentDTO> = _currentWeatherLiveData
 
     private var _dayWeatherLiveData = MutableLiveData<List<Day>>()
     val dayWeatherLiveData: MutableLiveData<List<Day>> = _dayWeatherLiveData
@@ -91,7 +91,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun putData(it: WeatherDTO) {
+    private fun putData(it: WeatherCurrentDTO) {
         try {
             _cityNameLiveData.value = "${it.name}, ${getProperDateTime(it.dataTime)}"
             _currentWeatherLiveData.value = it
