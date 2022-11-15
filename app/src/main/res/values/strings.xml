@@ -3,4 +3,6 @@
     <string name="search">Поиск</string>
     <string name="enterCityName">Введите название города</string>
     <string name="whereami">Там где я</string>
+    <string name="thisDay">Прогноз на этот день</string>
+    <string name="thisWeek">Прогноз погоды на неделю</string>
 </resources>

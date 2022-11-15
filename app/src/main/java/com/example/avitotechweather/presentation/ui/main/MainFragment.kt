@@ -1,6 +1,7 @@
 package com.example.avitotechweather.presentation.ui.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -18,7 +19,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.avitotechweather.databinding.MainFragmentBinding
-import com.example.avitotechweather.domain.entity.WeatherAllDTO
 import com.example.avitotechweather.presentation.WeatherAdapter
 import com.example.avitotechweather.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +54,7 @@ class MainFragment : Fragment(), LocationListener {
         viewModel.getCurrentWeather("", false, lat, lon)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (ActivityCompat.checkSelfPermission(
@@ -73,12 +74,12 @@ class MainFragment : Fragment(), LocationListener {
                 coordinates.text = it.toString()
             }
             viewModel.currentWeatherLiveData.observe(viewLifecycleOwner) {
-                itemWeather.feelsLike.text = it.main.feelsLike.toString()
+                itemWeather.feelsLike.text = "ощущается как ${it.main.feelsLike}°C"
                 itemWeather.dateTime.text = "Погода прямо сейчас"
-                itemWeather.windSpeed.text = it.wind.speed.toString()
-                itemWeather.humidity.text = it.main.humidity.toString()
-                itemWeather.textTemperature.text = it.main.temp.toString()
-                itemWeather.pressure.text = it.main.pressure.toString()
+                itemWeather.windSpeed.text = "скорость ветра: ${it.wind.speed}"
+                itemWeather.humidity.text = "влажность ${it.wind.speed}%"
+                itemWeather.textTemperature.text = "${it.main.temp}"
+                itemWeather.pressure.text = "давление ${it.main.pressure}"
                 itemWeather.weatherDescription.text = it.weather[0].description
                 Glide.with(itemWeather.root)
                     .load(Utils.getIcon(it.weather[0].icon))
