@@ -72,15 +72,14 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewDay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityName"/>
+            app:layout_constraintTop_toBottomOf="@+id/coordinates" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/thisWeek"
-            app:layout_constraintTop_toBottomOf="@+id/thisDay"
-            app:layout_constraintVertical_bias="0.02">
+            app:layout_constraintTop_toBottomOf="@+id/thisDay">
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
@@ -91,14 +90,15 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewWeek"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewDay"/>
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewDay" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewDay">
+            app:layout_constraintTop_toTopOf="@+id/thisWeek">
         </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

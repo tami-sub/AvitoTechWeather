@@ -14,8 +14,7 @@ interface OpenWeatherMapApi {
         @Query("q") city: String,
         @Query("cnt") cnt: Int,
         @Query("units") celsius: String = "metric",
-        @Query("lang") lang: String = "ru",
-        @Query("appid") appId: String = API_KEY
+        @Query("lang") lang: String = "ru"
     ): Result<WeatherAllDTO>
 
     @GET("data/2.5/forecast")
@@ -24,16 +23,14 @@ interface OpenWeatherMapApi {
         @Query("lon") lan: String,
         @Query("cnt") cnt: Int,
         @Query("units") celsius: String = "metric",
-        @Query("lang") lang: String = "ru",
-        @Query("appid") appId: String = API_KEY
+        @Query("lang") lang: String = "ru"
     ): Result<WeatherAllDTO>
 
     @GET("data/2.5/weather")
     suspend fun getCurrentWeather(
         @Query("q") city: String,
         @Query("units") celsius: String = "metric",
-        @Query("lang") lang: String = "ru",
-        @Query("appid") appId: String = API_KEY
+        @Query("lang") lang: String = "ru"
     ): Result<WeatherDTO>
 
     @GET("data/2.5/weather")
@@ -41,7 +38,6 @@ interface OpenWeatherMapApi {
         @Query("lat") lat: String,
         @Query("lon") lan: String,
         @Query("units") celsius: String = "metric",
-        @Query("lang") lang: String = "ru",
-        @Query("appid") appId: String = API_KEY
+        @Query("lang") lang: String = "ru"
     ): Result<WeatherDTO>
 }

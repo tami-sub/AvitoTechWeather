@@ -8,8 +8,7 @@ class CustomInterceptor : Interceptor {
 		val url = chain.request().url.newBuilder()
 			.addQueryParameter("appid", API_KEY)
 			.build()
-		val request = chain.request().newBuilder().url(url)
-			.build()
-		return chain.proceed(request)
+		return chain.proceed(chain.request().newBuilder().url(url)
+			.build())
 	}
 }
