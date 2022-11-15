@@ -1,13 +1,11 @@
 package com.example.avitotechweather.domain.entity
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class CityDTO(
+import com.google.gson.annotations.SerializedName
+
+data class Coord(
     @SerializedName("lat")
-    val lat: String,
+    val lat: Double,
     @SerializedName("lon")
-    val lon: String
-) : Parcelable
+    val lon: Double
+)

@@ -13,9 +13,9 @@ data class WeatherDTO (
     @SerializedName("timezone")
     val timezone: Long,
     @SerializedName("main")
-    val main: WeatherMainListDTO,
+    val main: Main,
     @SerializedName("weather")
-    val weather: List<WeatherWeatherListDTO>,
+    val weather: List<Weather>,
     @SerializedName("wind")
-    val wind: WeatherWindListDTO
+    val wind: Wind
 ) : Parcelable

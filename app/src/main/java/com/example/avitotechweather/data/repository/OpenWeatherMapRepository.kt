@@ -2,7 +2,6 @@ package com.example.avitotechweather.data.repository
 
 import com.example.avitotechweather.data.network.OpenWeatherMapApi
 import com.example.avitotechweather.domain.entity.WeatherAllDTO
-import com.example.avitotechweather.domain.entity.CityDTO
 import com.example.avitotechweather.domain.entity.WeatherDTO
 import javax.inject.Inject
 

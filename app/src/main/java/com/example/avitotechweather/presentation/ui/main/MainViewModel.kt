@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.utils.Utils.getProperDateTime
 import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
-import com.example.avitotechweather.domain.entity.WeatherAllDTO
+import com.example.avitotechweather.domain.entity.Day
 import com.example.avitotechweather.domain.entity.WeatherDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.stream.IntStream.range
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,11 +24,11 @@ class MainViewModel @Inject constructor(
     private var _currentWeatherLiveData = MutableLiveData<WeatherDTO>()
     val currentWeatherLiveData: MutableLiveData<WeatherDTO> = _currentWeatherLiveData
 
-    private var _dayWeatherLiveData = MutableLiveData<List<WeatherAllDTO.Days>>()
-    val dayWeatherLiveData: MutableLiveData<List<WeatherAllDTO.Days>> = _dayWeatherLiveData
+    private var _dayWeatherLiveData = MutableLiveData<List<Day>>()
+    val dayWeatherLiveData: MutableLiveData<List<Day>> = _dayWeatherLiveData
 
-    private var _weekWeatherLiveData = MutableLiveData<List<WeatherAllDTO.Days>>()
-    val weekWeatherLiveData: MutableLiveData<List<WeatherAllDTO.Days>> = _weekWeatherLiveData
+    private var _weekWeatherLiveData = MutableLiveData<List<Day>>()
+    val weekWeatherLiveData: MutableLiveData<List<Day>> = _weekWeatherLiveData
 
     init {}
 

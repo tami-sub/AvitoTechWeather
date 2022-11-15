@@ -6,17 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.avitotechweather.databinding.ItemWeatherBinding
+import com.example.avitotechweather.domain.entity.Day
 import com.example.avitotechweather.domain.entity.WeatherAllDTO
 import com.example.avitotechweather.utils.Utils.getIcon
 
 class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
-    private var weathers = mutableListOf<WeatherAllDTO.Days>()
+    private var weathers = mutableListOf<Day>()
 
     class WeatherViewHolder(private val binding: ItemWeatherBinding)
         : RecyclerView.ViewHolder(binding.root){
         @SuppressLint("SetTextI18n")
-        fun bind(weather: WeatherAllDTO.Days) {
+        fun bind(weather: Day) {
             binding.also { x ->
                 x.dateTime.text = "дата: ${weather.dtTxt}"
                 x.humidity.text = "влажность ${weather.main.humidity}%"
@@ -44,7 +45,7 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() 
         }
     }
 
-    fun setItems(weatherList: List<WeatherAllDTO.Days>) {
+    fun setItems(weatherList: List<Day>) {
         weathers = weatherList.toMutableList()
         notifyDataSetChanged()
     }
