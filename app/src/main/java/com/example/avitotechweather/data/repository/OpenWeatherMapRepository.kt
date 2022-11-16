@@ -6,21 +6,24 @@ import com.example.avitotechweather.domain.entity.WeatherCurrentDTO
 import javax.inject.Inject
 
 class OpenWeatherMapRepository
-@Inject constructor(private val api: OpenWeatherMapApi )
-{
-    suspend fun getCurrentWeather(cityName: String): Result<WeatherCurrentDTO> {
+@Inject constructor(private val api: OpenWeatherMapApi) : IOpenWeatherMapRepository {
+    override suspend fun getCurrentWeather(cityName: String): Result<WeatherCurrentDTO> {
         return api.getCurrentWeather(cityName)
     }
 
-    suspend fun getCurrentGeoWeather(lat: String, lon:String): Result<WeatherCurrentDTO> {
+    override suspend fun getCurrentGeoWeather(lat: String, lon: String): Result<WeatherCurrentDTO> {
         return api.getCurrentGeoWeather(lat, lon)
     }
 
-    suspend fun getDayWeekWeather(city: String, cnt: Int): Result<WeatherAllDTO> {
+    override suspend fun getDayWeekWeather(city: String, cnt: Int): Result<WeatherAllDTO> {
         return api.getDayWeekWeather(city, cnt)
     }
 
-    suspend fun getGeoDayWeekWeather(lat: String, lon: String, cnt: Int): Result<WeatherAllDTO> {
+    override suspend fun getGeoDayWeekWeather(
+        lat: String,
+        lon: String,
+        cnt: Int,
+    ): Result<WeatherAllDTO> {
         return api.getGeoDayWeekWeather(lat, lon, cnt)
     }
 }

@@ -111,6 +111,7 @@ class MainFragment : Fragment(), LocationListener {
             if (checkLoadGPS) {
                 getCurrentLocation(lat, lon)
             }
+            binding.cityName.text.clear()
         }
     }
 

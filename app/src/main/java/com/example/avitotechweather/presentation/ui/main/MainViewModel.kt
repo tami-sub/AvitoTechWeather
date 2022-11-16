@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avitotechweather.utils.Utils.getProperDateTime
-import com.example.avitotechweather.data.repository.OpenWeatherMapRepository
 import com.example.avitotechweather.domain.entity.Day
 import com.example.avitotechweather.domain.entity.WeatherCurrentDTO
+import com.example.avitotechweather.domain.interactor.IOpenWeatherMapInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val openWeatherMapRepository:
-    OpenWeatherMapRepository,
+    private val openWeatherMapInteractor:
+    IOpenWeatherMapInteractor
 ) : ViewModel() {
 
     private var _cityNameLiveData = MutableLiveData<String?>()
@@ -36,14 +36,14 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
 
             if (flag) {
-                openWeatherMapRepository.getCurrentWeather(cityName).onSuccess {
+                openWeatherMapInteractor.getCurrentWeather(cityName).onSuccess {
                     putData(it)
 
                 }.onFailure {
                     Log.d("KOT", "Current problem:  ${it.message.toString()}")
                 }
             } else {
-                openWeatherMapRepository.getCurrentGeoWeather(lat.toString(), lon.toString())
+                openWeatherMapInteractor.getCurrentGeoWeather(lat.toString(), lon.toString())
                     .onSuccess {
                         putData(it)
 
@@ -58,7 +58,7 @@ class MainViewModel @Inject constructor(
     fun getDayWeekWeather(city: String = "", lat: Float = 0f, lon: Float = 0f) {
         viewModelScope.launch {
             try {
-                openWeatherMapRepository.getDayWeekWeather(city, 7).onSuccess {
+                openWeatherMapInteractor.getDayWeekWeather(city, 7).onSuccess {
                     _dayWeatherLiveData.value = it.list
                 }
             } catch (e: Exception) {
@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            openWeatherMapRepository.getDayWeekWeather(city, 55).onSuccess {
+            openWeatherMapInteractor.getDayWeekWeather(city, 55).onSuccess {
                 _weekWeatherLiveData.value = it.list
             }
         }
@@ -76,7 +76,7 @@ class MainViewModel @Inject constructor(
     fun getGeoDayWeekWeather(lat: Float, lon: Float) {
         viewModelScope.launch {
             try {
-                openWeatherMapRepository.getGeoDayWeekWeather(lat.toString(), lon.toString(),7).onSuccess {
+                openWeatherMapInteractor.getGeoDayWeekWeather(lat.toString(), lon.toString(),7).onSuccess {
                     _dayWeatherLiveData.value = it.list
                 }
             } catch (e: Exception) {
@@ -85,7 +85,7 @@ class MainViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            openWeatherMapRepository.getGeoDayWeekWeather(lat.toString(), lon.toString(),55).onSuccess {
+            openWeatherMapInteractor.getGeoDayWeekWeather(lat.toString(), lon.toString(),55).onSuccess {
                 _weekWeatherLiveData.value = it.list
             }
         }
